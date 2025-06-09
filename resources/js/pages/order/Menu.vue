@@ -35,6 +35,48 @@ import { Head, Link } from '@inertiajs/vue3';
   </button>
 </div>
 
+<nav class="nav mt-5">
+  <a class="nav-link active" aria-current="page" href="#">Menu</a>
+  <a class="nav-link" href="#">Cabang</a>
+  <a class="nav-link" href="#">Promo</a>
+</nav>
+<hr>
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex">
+      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <div class="flex-grow-1 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-1">Judul Produk</h5>
+        </div>
+        <div class="text-muted fw-bold">Rp 150.000</div>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex">
+      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <div class="flex-grow-1 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-1">Judul Produk</h5>
+        </div>
+        <div class="text-muted fw-bold">Rp 150.000</div>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex">
+      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <div class="flex-grow-1 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-1">Judul Produk</h5>
+        </div>
+        <div class="text-muted fw-bold">Rp 150.000</div>
+      </div>
+    </div>
+  </a>
+</div>
+
 </div>
 </template>
 <script>
