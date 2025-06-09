@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import { GitBranch } from 'lucide-vue-next';
 </script>
 <template>
     <Head title="Menu">
@@ -36,52 +37,46 @@ import { Head, Link } from '@inertiajs/vue3';
 </div>
 
 <nav class="nav mt-5">
-  <a class="nav-link active" aria-current="page" href="#">Menu</a>
-  <a class="nav-link" href="#">Cabang</a>
+  <a class="nav-link active" @click="showData('menu')">Menu</a>
+  <a class="nav-link" @click="showData('branch')">Cabang</a>
   <a class="nav-link" href="#">Promo</a>
 </nav>
 <hr>
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+<div class="list-group" v-if="dstocks.show">
+  <a v-for="(stock, index) in dstocks.data" href="#" class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex">
-      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <img :src="stock.stock_thumbnail" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
       <div class="flex-grow-1 d-flex flex-column justify-content-between">
         <div>
-          <h5 class="mb-1">Judul Produk</h5>
+          <h5 class="mb-1">{{ stock.stock_name }}</h5>
         </div>
-        <div class="text-muted fw-bold">Rp 150.000</div>
-      </div>
-    </div>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-    <div class="d-flex">
-      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-      <div class="flex-grow-1 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-1">Judul Produk</h5>
-        </div>
-        <div class="text-muted fw-bold">Rp 150.000</div>
-      </div>
-    </div>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-    <div class="d-flex">
-      <img src="https://placehold.co/600x400?text=Hello+World+1" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-      <div class="flex-grow-1 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-1">Judul Produk</h5>
-        </div>
-        <div class="text-muted fw-bold">Rp 150.000</div>
+        <div class="text-muted fw-bold">Rp {{ stock.price }}</div>
       </div>
     </div>
   </a>
 </div>
-
+<div class="list-group" v-if="dbranchs.show">
+  <a v-for="(branch, index) in dbranchs.data" href="#" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex">
+      <img :src="branch.stock_thumbnail" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <div class="flex-grow-1 d-flex flex-column justify-content-between">
+        <h6 class="">{{ branch.branch_name }}</h6>
+        <div class="text-muted">{{ branch.branch_address }}</div>
+        <div class="text-muted">{{ branch.branch_phone }}</div>
+        <div class="text-muted">{{ branch.branch_type }}</div>
+      </div>
+    </div>
+  </a>
+</div>
 </div>
 </template>
 <script>
 export default {
     name: 'Menu',
+    props: {
+        stocks: Object,
+        branchs: Object,
+    },
     data() {
         return {
             searchQuery: '',
@@ -89,14 +84,33 @@ export default {
               'https://placehold.co/1440x470?text=Hello+World+1',
               'https://placehold.co/1440x470?text=Hello+World+2',
               'https://placehold.co/1440x470?text=Hello+World+3'
-            ]
+            ],
+            dstocks: {
+                show: true,
+                data: this.stocks
+            },
+            dbranchs: {
+                show: false,
+                data: this.branchs
+            },
         };
     },
     methods: {
         notify() {
-            // Logic for notification click
             alert('Notification clicked!');
+        },
+        showData(type) {
+            if (type === 'menu') {
+                this.dstocks.show = true;
+                this.dbranchs.show = false;
+            } else if (type === 'branch') {
+              this.dstocks.show = false;
+              this.dbranchs.show = true;
+            }
         }
+    },
+    mounted() {
+      console.log(this.branchs)
     }
 }
 </script>
