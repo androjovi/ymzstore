@@ -36,25 +36,30 @@ import { GitBranch } from 'lucide-vue-next';
   </button>
 </div>
 
-<nav class="nav mt-5">
+<!-- <nav class="nav mt-5">
   <a class="nav-link active" @click="showData('menu')">Menu</a>
   <a class="nav-link" @click="showData('branch')">Cabang</a>
   <a class="nav-link" href="#">Promo</a>
-</nav>
+</nav> -->
 <hr>
 <div class="list-group" v-if="dstocks.show">
-  <a v-for="(stock, index) in dstocks.data" href="#" class="list-group-item list-group-item-action" aria-current="true">
-    <div class="d-flex">
-      <img :src="stock.stock_thumbnail" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-      <div class="flex-grow-1 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-1">{{ stock.stock_name }}</h5>
-        </div>
-        <div class="text-muted fw-bold">Rp {{ stock.price }}</div>
+    <div v-for="(stocks, categoryName) in groupedStocks" :key="categoryName">
+      <h4>{{ categoryName }}</h4> <div class="list-group mb-4">
+        <a v-for="(stock, index) in stocks" :key="stock.id" href="#" class="list-group-item list-group-item-action" aria-current="true" @click="orderingCart(stock)">
+          <div class="d-flex">
+            <img :src="stock.stock_thumbnail" alt="Produk" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+            <div class="flex-grow-1 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="mb-1">{{ stock.stock_name }}</h5>
+              </div>
+              <div class="text-muted fw-bold">Rp {{ stock.price }}</div>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
-  </a>
-</div>
+  </div>
+<hr>
 <div class="list-group" v-if="dbranchs.show">
   <a v-for="(branch, index) in dbranchs.data" href="#" class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex">
@@ -69,8 +74,37 @@ import { GitBranch } from 'lucide-vue-next';
   </a>
 </div>
 </div>
+
+<div class="modal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Selamat datang, Pilih cabang terdekat kamu dulu</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <a v-for="(branch, index) in dbranchs.data" href="#" class="list-group-item list-group-item-action" aria-current="true" @click="showMenu(branch)">
+            <div class="d-flex">
+              <img :src="branch.branch_thumbnail" alt="Cabang alt" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+              <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                <h6 class="fw-bold">{{ branch.branch_name }} <small class="fw-light" style="font-size: 10px">400km</small></h6>
+                <div class="text-muted"><i class="pi pi-map-marker"></i> {{ branch.branch_address }}</div>
+                <div class="text-muted"><i class="pi pi-phone"></i> {{ branch.branch_phone }}</div>
+                <div class="text-muted small">{{ branch.branch_type }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
 <script>
+import { Modal } from "bootstrap"
+import axios from "axios";
 export default {
     name: 'Menu',
     props: {
@@ -87,12 +121,13 @@ export default {
             ],
             dstocks: {
                 show: true,
-                data: this.stocks
+                data: []
             },
             dbranchs: {
                 show: false,
                 data: this.branchs
             },
+            uniqueModal: null
         };
     },
     methods: {
@@ -101,16 +136,54 @@ export default {
         },
         showData(type) {
             if (type === 'menu') {
-                this.dstocks.show = true;
+                this.dstocks.show = false;
                 this.dbranchs.show = false;
             } else if (type === 'branch') {
               this.dstocks.show = false;
               this.dbranchs.show = true;
             }
+        },
+        showMenu(branch) {
+          console.log(branch);
+            this.$inertia.get('/get-stock/' + branch.id, { }, {
+              replace: true,
+              preserveState: true,
+              preserveScroll: true,
+              only: ['data'],
+              onSuccess: (data) => {
+                    data = data.props.data;
+                    this.dstocks.data = data;
+                    this.dstocks.show = true;
+                    alert("Terimakasih telah memilih, silakan pilih menu yang anda inginkan");
+                    this.uniqueModal.hide();
+              }
+            });
+
+        },
+        orderingCart(stock){
+          alert("Anda memilih " + stock.stock_name + " dengan harga Rp " + stock.price);
         }
     },
+    computed: {
+      groupedStocks() {
+        if (!this.dstocks.data || this.dstocks.data.length === 0) {
+          return {}
+        }
+
+        const groups = {}
+        this.dstocks.data.forEach(stock => {
+          const category = stock.category_name || 'Lain-lain'
+          if (!groups[category]) {
+            groups[category] = []
+          }
+          groups[category].push(stock)
+        })
+        return groups
+      },
+    },
     mounted() {
-      console.log(this.branchs)
+      this.uniqueModal = new Modal(document.getElementById("exampleModal"),{ keyboard: false });
+      this.uniqueModal.show();
     }
 }
 </script>

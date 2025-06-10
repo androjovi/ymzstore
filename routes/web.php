@@ -11,6 +11,8 @@ Route::get('/', function () {
 
 Route::get('/menu', [StockController::class, 'show'])
     ->name('menu');
+Route::get('/get-stock/{id}', [StockController::class, 'getMenu'])
+    ->name('stock.branch');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

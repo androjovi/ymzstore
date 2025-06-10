@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('branch_phone');
             $table->string('branch_latitude')->nullable();
             $table->string('branch_longitude')->nullable();
+            $table->string('branch_thumbnail')->nullable();
             $table->text('branch_address')->nullable();
             $table->bigInteger('created_by');
             $table->timestamps();

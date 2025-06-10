@@ -3,6 +3,7 @@
 
 @import 'tw-animate-css'; */
 @import "bootstrap/dist/css/bootstrap.min.css";
+@import 'primeicons/primeicons.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
