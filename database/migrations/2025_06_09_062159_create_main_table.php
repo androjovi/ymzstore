@@ -48,6 +48,20 @@ return new class extends Migration
             $table->string('stock_description');
             $table->timestamps();
         });
+
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id()->autoIncrement()->primary();
+            $table->bigInteger('cart_code');
+            $table->bigInteger('branch_id');
+            $table->bigInteger('stock_id');
+            $table->bigInteger('user_id');
+            $table->string('order_type');
+            $table->double('total_quantity');
+            $table->double('total_price');
+            $table->double('tax');
+            $table->bigInteger('created_by');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -58,5 +72,6 @@ return new class extends Migration
         Schema::dropIfExists('branch');
         Schema::dropIfExists('stock');
         Schema::dropIfExists('stock_type');
+        Schema::dropIfExists('cart');
     }
 };

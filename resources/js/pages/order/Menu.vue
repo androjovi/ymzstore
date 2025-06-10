@@ -101,9 +101,45 @@ import { GitBranch } from 'lucide-vue-next';
   </div>
 </div>
 
+<div class="offcanvas offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Tambah Keranjang</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+    <div class="container">
+      <div v-for="(cart, index) in dcarts.data" class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img style="width: 120px; height: 120px; object-fit: cover;" :src="cart.stock_thumbnail" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <div class="card-block px-2">
+                    <h4 class="card-title">{{ cart.stock_name }}</h4>
+                    <p class="card-text">{{ cart.stock_description_cut }}</p>
+                    <p class="card-text">Rp {{ cart.price_qty }}</p>
+                    <div class="input-group w-auto justify-content-end align-items-center">
+                      <input @click="decrement(index)" type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 ">
+                      <input type="number" step="1" :max="cart.stock_quantity" v-model.number="cart.quantity" name="quantity" class="quantity-field border-0 text-center w-25">
+                      <input @click="increment(index)" type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="text-muted">Total: Rp {{ dcarts.data.reduce((total, item) => total + (item.price * item.quantity), 0) }}</div>
+      <button class="btn btn-danger" @click="clearLocalStorage">Hapus Keranjang</button>
+      <button class="btn btn-primary" @click="uniqueOffcanvas.hide(); goToPayment();">Selesai</button>
+    </div>
+    </div>
+  </div>
+</div>
+
 </template>
 <script>
-import { Modal } from "bootstrap"
+import { Modal, Offcanvas } from "bootstrap"
+import uniqid from 'uniqid';
 import axios from "axios";
 export default {
     name: 'Menu',
@@ -127,7 +163,12 @@ export default {
                 show: false,
                 data: this.branchs
             },
-            uniqueModal: null
+            uniqueModal: null,
+            uniqueOffcanvas: null,
+            dcarts: {
+                show: false,
+                data: []
+            }
         };
     },
     methods: {
@@ -161,7 +202,75 @@ export default {
 
         },
         orderingCart(stock){
-          alert("Anda memilih " + stock.stock_name + " dengan harga Rp " + stock.price);
+          this.uniqueOffcanvas = new Offcanvas(document.getElementById("offcanvasBottom"));
+          this.uniqueOffcanvas.show();
+          this.save2LocalStorage(stock);
+          console.log(this.dcarts.data);
+        },
+        save2LocalStorage(stock) {
+            let readStocks = this.loadFromLocalStorage();
+            let a = [];
+            if (readStocks.length > 0) {
+                a = JSON.parse(readStocks);
+            }
+            const existingStockIndex = a.findIndex(item => item.id === stock.id);
+            if (existingStockIndex !== -1) {
+              if (a[existingStockIndex].quantity >= a[existingStockIndex].stock_quantity) {
+                this.dcarts.data = a;
+                alert('Stok tidak mencukupi, silakan kurangi jumlah pesanan');
+                return;
+              }
+                // a[existingStockIndex].quantity += stock.quantity;
+                // localStorage.setItem('cart', JSON.stringify(a));
+                // return this.dcarts.data = a;
+              return
+            }
+            a.push(stock);
+            localStorage.setItem('cart', JSON.stringify(a));
+            this.dcarts.data = a;
+        },
+        loadFromLocalStorage() {
+            const stocks = localStorage.getItem('cart')||[];
+            return stocks
+        },
+        deleteFromLocalStorage(index) {
+            let readStocks = this.loadFromLocalStorage();
+            let a = [];
+            if (readStocks.length > 0) {
+                a = JSON.parse(readStocks);
+            }
+            a.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(a));
+            this.dcarts.data = a;
+        },
+        clearLocalStorage() {
+            localStorage.removeItem('cart');
+            this.dcarts.data = [];
+            this.uniqueOffcanvas.hide();
+        },
+        increment(index){
+            if (this.dcarts.data[index].quantity < this.dcarts.data[index].stock_quantity) {
+                this.dcarts.data[index].quantity++;
+                this.dcarts.data[index].price_qty = this.dcarts.data[index].price * this.dcarts.data[index].quantity;
+            }
+        },
+        decrement(index){
+            if (this.dcarts.data[index].quantity > 1) {
+                this.dcarts.data[index].quantity--;
+                this.dcarts.data[index].price_qty = this.dcarts.data[index].price * this.dcarts.data[index].quantity;
+            } else {
+                this.deleteFromLocalStorage(index);
+            }
+        },
+        goToPayment() {
+            if (this.dcarts.data.length === 0) {
+                alert('Keranjang masih kosong, silakan pilih menu terlebih dahulu');
+                return;
+            }
+            this.$inertia.get('/cart', { }, {
+                onSuccess: () => {
+                }
+            });
         }
     },
     computed: {

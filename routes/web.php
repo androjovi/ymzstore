@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -13,6 +14,8 @@ Route::get('/menu', [StockController::class, 'show'])
     ->name('menu');
 Route::get('/get-stock/{id}', [StockController::class, 'getMenu'])
     ->name('stock.branch');
+Route::get('/cart', [CartController::class, 'show'])
+    ->name('cart');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

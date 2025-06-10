@@ -23,7 +23,7 @@ class StockController extends Controller
     public function getMenu($id)
     {;
         $stocks = DB::table('stock')
-            ->selectRaw("stock.id,stock.stock_name,stock.stock_thumbnail,stock.price,stock.stock_type,stock_type.stock_name 'category_name'")
+            ->selectRaw("stock.id,stock.stock_name,stock.stock_thumbnail,stock.price,stock.price 'price_qty',stock.stock_type,stock.stock_description,left(stock.stock_description,60) 'stock_description_cut',stock.stock_quantity,stock_type.stock_name 'category_name', concat(1)+0 'quantity'")
             ->join('stock_type', 'stock_type.id', '=', 'stock.stock_type')
             ->orderBy('stock_type.id', 'asc')
             ->get();
