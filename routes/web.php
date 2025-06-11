@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -19,6 +20,8 @@ Route::get('/cart', [CartController::class, 'show'])
     ->name('cart');
 Route::post('/order', [OrderController::class, 'save'])
     ->name('order');
+Route::post('/payment-confirmation', [PaymentController::class, 'confirmPayment'])
+    ->name('payment-confirmation');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

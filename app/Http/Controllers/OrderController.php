@@ -59,7 +59,14 @@ class OrderController extends Controller
         ]);
 
         return Inertia::render('payment/Payment', [
-
+            'data' => [
+                'invoice' => $invoiceNumber,
+                'payment_code' => $paymentCode,
+                'total_payment' => $request->detail['total'] + ($request->detail['total'] * $this->taxes),
+                'payBy' => $request->detail['payBy'],
+                'expired' => now()->addMinutes(15)->format('d F Y H:i:s'),
+            ],
+            'message' => 'Order placed successfully!',
         ]);
 
     }

@@ -115,10 +115,10 @@ import { GitBranch } from 'lucide-vue-next';
             <div class="container-fluid">
                 <div class="row no-gutter">
                     <div class="col-6">
-                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'qris';hideModal()">QRIS</button>
+                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'qris';hideModal(); goToPayment();">QRIS</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'cash';hideModal()">CASH</button>
+                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'cash';hideModal(); goToPayment();">CASH</button>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@ export default {
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    this.clearLocalStorage()
+                    // this.clearLocalStorage()
                 }
             });
         },
