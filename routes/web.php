@@ -5,6 +5,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -16,6 +17,8 @@ Route::get('/get-stock/{id}', [StockController::class, 'getMenu'])
     ->name('stock.branch');
 Route::get('/cart', [CartController::class, 'show'])
     ->name('cart');
+Route::post('/order', [OrderController::class, 'save'])
+    ->name('order');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

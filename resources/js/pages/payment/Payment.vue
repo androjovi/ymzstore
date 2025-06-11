@@ -25,106 +25,6 @@ import { GitBranch } from 'lucide-vue-next';
                 <small>Customize your order at the counter</small>
             </div>
         </div>
-        <hr>
-        <div class="row no-gutters">
-            <div class="col-6">
-                Phone Number
-            </div>
-            <div class="col-6 text-end">
-                or Sign in
-            </div>
-            <div class="col-12">
-                <i class="pi pi-phone"></i> 08123456789
-            </div>
-        </div>
-        <hr>
-        <div class="row no-gutters">
-            <div class="col-12">
-                <h3>Cabang</h3>
-                <h6>{{ detailCart.branch.branch_name }}</h6>
-            </div>
-        </div>
-        <hr style="border-top: dotted 2px;" />
-        <div v-for="(cart, index) in dcarts.data" class="card mb-3">
-            <div class="row no-gutters">
-              <div class="col-auto">
-                <img style="width: 120px; height: 120px; object-fit: cover;" :src="cart.stock_thumbnail" class="img-fluid" alt="">
-              </div>
-              <div class="col">
-                <div class="card-block">
-                  <h6 class="card-title">{{ cart.stock_name }}</h6>
-                  <p class="card-text">Rp {{ cart.price_qty }}</p>
-                  <div class="input-group w-auto justify-content-end align-items-center">
-                    <input @click="decrement(index)" type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 ">
-                    <input type="number" step="1" :max="cart.stock_quantity" v-model.number="cart.quantity" name="quantity" class="quantity-field border-0 text-center w-25">
-                    <input @click="increment(index)" type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm ">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- <div class="text-muted">Total: Rp {{ dcarts.data.reduce((total, item) => total + (item.price * item.quantity), 0) }}</div>
-            <button class="btn btn-primary" @click="uniqueOffcanvas.hide(); goToPayment();">Selesai</button> -->
-          </div>
-          <div class="row no-gutters">
-            <div class="col-12">
-                <textarea class="form-control" v-model="detailCart.notes" rows="3" placeholder="Tambahkan catatan untuk toko"></textarea>
-            </div>
-        </div>
-      <hr>
-      <div class="row no-gutters">
-        <div class="col-6">
-            <p>Product Quantity</p>
-        </div>
-        <div class="col-6 text-end">
-            <p>{{ detailCart.qty }} Items</p>
-        </div>
-        <div class="col-6">
-            <p>Total Taxes</p>
-        </div>
-        <div class="col-6 text-end">
-            <p>Rp {{ detailCart.taxes }}</p>
-        </div>
-        <div class="col-6">
-            <p>Point Earned</p>
-        </div>
-        <div class="col-6 text-end">
-            <p>+{{ detailCart.point }}</p>
-        </div>
-        <hr style="border-top: dotted 2px;">
-        <div class="col-6">
-            <p>Total Bill</p>
-        </div>
-        <div class="col-6 text-end">
-            <p>Rp {{ detailCart.total }}</p>
-        </div>
-    </div>
-
-    <button class="btn btn-primary w-100" @click="goToPayment()">Buy & Pickup</button>
-    </div>
-    <div class="modal" id="metodePembayaran" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Choose Payment Method</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row no-gutter">
-                    <div class="col-6">
-                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'qris';hideModal()">QRIS</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-outline-info w-100" @click="detailCart.payBy = 'cash';hideModal()">CASH</button>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </template>
 <script>
@@ -164,8 +64,8 @@ export default {
                 point: 0,
                 total: 0,
                 notes: '',
-                branch: JSON.parse(this.loadFromLocalStorageByKey('branch') || []),
-                payBy: null
+                branch: JSON.parse(this.loadFromLocalStorageByKey('branch') || [])
+
             }
         };
     },
@@ -248,6 +148,7 @@ export default {
         clearLocalStorage() {
             localStorage.removeItem('cart');
             this.dcarts.data = [];
+            this.uniqueOffcanvas.hide();
         },
         increment(index){
             if (this.dcarts.data[index].quantity < this.dcarts.data[index].stock_quantity) {
@@ -268,19 +169,13 @@ export default {
             }
         },
         goToPayment() {
-            if (this.detailCart.payBy === null) {
-                this.uniqueModal = new Modal(document.getElementById("metodePembayaran"),{ keyboard: false });
-                this.uniqueModal.show();
-                return;
-            }
-
             if (this.dcarts.data.length === 0) {
                 alert('Keranjang masih kosong, silakan pilih menu terlebih dahulu');
                 return;
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    this.clearLocalStorage()
+
                 }
             });
         },
@@ -290,11 +185,6 @@ export default {
             this.detailCart.point = this.dcarts.data.reduce((total, item) => total + (item.quantity * 10), 0);
             this.detailCart.total = this.dcarts.data.reduce((total, item) => total + (item.price_qty), 0);
             localStorage.setItem('cart', JSON.stringify(this.dcarts.data));
-        },
-        hideModal() {
-            if (this.uniqueModal) {
-                this.uniqueModal.hide();
-            }
         }
     },
     computed: {
@@ -315,8 +205,8 @@ export default {
       },
     },
     mounted() {
-        this.loadFromLocalStorage()
-        this.getDetailCart();
+        // this.loadFromLocalStorage()
+        // this.getDetailCart();
     },
     watch: {
         dcarts: {

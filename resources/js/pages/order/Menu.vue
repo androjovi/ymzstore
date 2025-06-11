@@ -197,6 +197,7 @@ export default {
                     this.dstocks.show = true;
                     alert("Terimakasih telah memilih, silakan pilih menu yang anda inginkan");
                     this.uniqueModal.hide();
+                    this.saveItemLocalStorage('branch', JSON.stringify(branch));
               }
             });
 
@@ -242,6 +243,9 @@ export default {
             a.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(a));
             this.dcarts.data = a;
+        },
+        saveItemLocalStorage(key, value) {
+          localStorage.setItem(key, value);
         },
         clearLocalStorage() {
             localStorage.removeItem('cart');

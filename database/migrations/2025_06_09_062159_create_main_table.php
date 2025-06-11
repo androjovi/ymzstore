@@ -62,6 +62,37 @@ return new class extends Migration
             $table->bigInteger('created_by');
             $table->timestamps();
         });
+
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id()->autoIncrement()->primary();
+            $table->bigInteger('order_parent');
+            $table->string('order_invoice');
+            $table->bigInteger('branch_id');
+            $table->bigInteger('stock_id');
+            $table->bigInteger('user_id');
+            $table->string('order_type');
+            $table->double('total_quantity');
+            $table->double('total_price');
+            $table->double('total_taxes');
+            $table->double('point_earned');
+            $table->double('status')->default(0);
+            $table->text('order_note')->nullable();
+            $table->text('order_note_mart')->nullable();
+            $table->bigInteger('created_by');
+            $table->timestamps();
+        });
+
+        Schema::create('payment', function (Blueprint $table) {
+            $table->id()->autoIncrement()->primary();
+            $table->bigInteger('user_id');
+            $table->string('payment_code')->unique();
+            $table->string('order_invoice');
+            $table->double('total_payment');
+            $table->string('payment_method')->default('CASHIER');
+            $table->string('payment_status')->default('PENDING');
+            $table->bigInteger('created_by');
+            $table->timestamps();
+        });
     }
 
     /**
