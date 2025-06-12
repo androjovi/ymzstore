@@ -9,7 +9,8 @@ use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-use Spatie\LaravelPdf\Facades\Pdf;
+// use Spatie\LaravelPdf\Facades\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaymentController extends Controller
 {
@@ -34,7 +35,17 @@ class PaymentController extends Controller
 
     public function paymentConfirmationPDF(Request $request)
     {
-        $pdf = Pdf::view('pdf.payment-confirmation',[
+        // $pdf = Pdf::view('pdf.payment-confirmation',[
+        //     'customer_name' => 'Guest',
+        //     'invoice' => $request->detailPayment['invoice'],
+        //     'payment_code' => $request->detailPayment['paymentCode'],
+        //     'total_payment' => $request->detailPayment['totalPayment'],
+        //     'payBy' => strtoupper($request->detailPayment['payBy']),
+        //     'timestamp' => now()->format('d F Y H:i:s'),
+        //     'expired' => $request->detailPayment['expired']
+        // ]);
+        // return $pdf->download('payment-confirmation.pdf');
+        $pdf = Pdf::loadView('pdf.payment-confirmation',[
             'customer_name' => 'Guest',
             'invoice' => $request->detailPayment['invoice'],
             'payment_code' => $request->detailPayment['paymentCode'],

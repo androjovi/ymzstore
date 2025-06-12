@@ -84,13 +84,13 @@ import { GitBranch } from 'lucide-vue-next';
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <a v-for="(branch, index) in dbranchs.data" href="#" class="list-group-item list-group-item-action" aria-current="true" @click="showMenu(branch)">
+          <a v-for="(branch, index) in dbranchs.data" href="#" class="list-group-item list-group-item-action mb-2" aria-current="true" @click="showMenu(branch)">
             <div class="d-flex">
               <img :src="branch.branch_thumbnail" alt="Cabang alt" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
               <div class="flex-grow-1 d-flex flex-column justify-content-between">
-                <h6 class="fw-bold">{{ branch.branch_name }} <small class="fw-light" style="font-size: 10px">400km</small></h6>
-                <div class="text-muted"><i class="pi pi-map-marker"></i> {{ branch.branch_address }}</div>
-                <div class="text-muted"><i class="pi pi-phone"></i> {{ branch.branch_phone }}</div>
+                <h6 class="fw-bold">{{ branch.branch_name }} <small class="fw-light" style="font-size: 10px">1.8km</small></h6>
+                <div class="text-muted small"><i class="pi pi-map-marker"></i> {{ branch.branch_address }}</div>
+                <div class="text-muted small"><i class="pi pi-phone"></i> {{ branch.branch_phone }}</div>
                 <div class="text-muted small">{{ branch.branch_type }}</div>
               </div>
             </div>
@@ -301,6 +301,9 @@ export default {
     mounted() {
       this.uniqueModal = new Modal(document.getElementById("exampleModal"),{ keyboard: false });
       this.uniqueModal.show();
+      if (this.loadFromLocalStorage().length > 0) {
+        this.dcarts.data = JSON.parse(this.loadFromLocalStorage());
+      }
     }
 }
 </script>
