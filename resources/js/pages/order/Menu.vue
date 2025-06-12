@@ -10,7 +10,7 @@ import { GitBranch } from 'lucide-vue-next';
         <a class="navbar-brand">MyStore</a>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
         </form>
       </div>
     </nav>
@@ -23,7 +23,7 @@ import { GitBranch } from 'lucide-vue-next';
   </div>
   <div class="carousel-inner">
     <div v-for="(image, index) in images" :class="['carousel-item', { active: index === 0 }]" :key="index">
-      <img :src="image" class="d-block w-100" alt="...">
+      <img style="width:1440px; height:440px;object-fit: fill;" :src="image" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -36,11 +36,11 @@ import { GitBranch } from 'lucide-vue-next';
   </button>
 </div>
 
-<!-- <nav class="nav mt-5">
-  <a class="nav-link active" @click="showData('menu')">Menu</a>
-  <a class="nav-link" @click="showData('branch')">Cabang</a>
-  <a class="nav-link" href="#">Promo</a>
-</nav> -->
+<nav class="nav mt-5">
+    <a class="btn btn-outline-info" @click="showData('menu')">Menu</a>
+    &nbsp;
+  <a class="btn btn-outline-success" @click="showBranch()">List Cabang</a>
+</nav>
 <hr>
 <div class="list-group" v-if="dstocks.show">
     <div v-for="(stocks, categoryName) in groupedStocks" :key="categoryName">
@@ -151,9 +151,9 @@ export default {
         return {
             searchQuery: '',
             images: [
-              'https://placehold.co/1440x470?text=Hello+World+1',
-              'https://placehold.co/1440x470?text=Hello+World+2',
-              'https://placehold.co/1440x470?text=Hello+World+3'
+              '/storage/images/promogambar1.png',
+              '/storage/images/promogambar2.png',
+              '/storage/images/promogambar3.png'
             ],
             dstocks: {
                 show: true,
@@ -279,6 +279,9 @@ export default {
         num2hum(num) {
             num = parseFloat(num) || 0
             return num.toLocaleString('en-US', { maximumFractionDigits: 2 })
+        },
+        showBranch() {
+            this.uniqueModal.show();
         }
     },
     computed: {

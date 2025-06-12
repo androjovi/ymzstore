@@ -8,9 +8,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+Route::get('/', [StockController::class, 'show'])
+    ->name('home');
 
 Route::get('/menu', [StockController::class, 'show'])
     ->name('menu');

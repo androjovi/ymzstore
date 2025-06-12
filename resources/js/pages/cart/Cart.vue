@@ -9,7 +9,7 @@ import { GitBranch } from 'lucide-vue-next';
         <a class="navbar-brand">MyStore</a>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <!-- <button class="btn-sm btn-outline-success" type="submit">Search</button> -->
         </form>
       </div>
     </nav>
@@ -102,7 +102,7 @@ import { GitBranch } from 'lucide-vue-next';
         </div>
     </div>
 
-    <button class="btn btn-primary w-100" @click="goToPayment()">Buy & Pickup</button>
+    <button class="btn btn-primary w-100 mb-2" @click="goToPayment()">Buy & Pickup</button>
     </div>
     <div class="modal" id="metodePembayaran" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -280,7 +280,7 @@ export default {
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    // this.clearLocalStorage()
+                    this.clearLocalStorage()
                 }
             });
         },

@@ -52,7 +52,7 @@
       </tr>
       <tr>
         <td><strong>Amount Paid:</strong></td>
-        <td>Rp{{ $total_payment }}</td>
+        <td>Rp {{ $total_payment }}</td>
       </tr>
       <tr>
         <td><strong>Date:</strong></td>
