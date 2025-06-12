@@ -206,7 +206,6 @@ export default {
           this.uniqueOffcanvas = new Offcanvas(document.getElementById("offcanvasBottom"));
           this.uniqueOffcanvas.show();
           this.save2LocalStorage(stock);
-          console.log(this.dcarts.data);
         },
         save2LocalStorage(stock) {
             let readStocks = this.loadFromLocalStorage();
@@ -228,6 +227,7 @@ export default {
             }
             a.push(stock);
             localStorage.setItem('cart', JSON.stringify(a));
+            console.log(this.dcarts.data);
             this.dcarts.data = a;
         },
         loadFromLocalStorage() {
