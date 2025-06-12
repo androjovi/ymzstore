@@ -22,6 +22,8 @@ Route::post('/order', [OrderController::class, 'save'])
     ->name('order');
 Route::post('/payment-confirmation', [PaymentController::class, 'confirmPayment'])
     ->name('payment-confirmation');
+Route::post('/payment-confirmation-pdf', [PaymentController::class, 'paymentConfirmationPDF'])
+    ->name('payment.pdf');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

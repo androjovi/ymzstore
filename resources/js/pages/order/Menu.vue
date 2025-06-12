@@ -52,7 +52,7 @@ import { GitBranch } from 'lucide-vue-next';
               <div>
                 <h5 class="mb-1">{{ stock.stock_name }}</h5>
               </div>
-              <div class="text-muted fw-bold">Rp {{ stock.price }}</div>
+              <div class="text-muted fw-bold">Rp {{ num2hum(stock.price) }}</div>
             </div>
           </div>
         </a>
@@ -117,7 +117,7 @@ import { GitBranch } from 'lucide-vue-next';
                 <div class="card-block px-2">
                     <h4 class="card-title">{{ cart.stock_name }}</h4>
                     <p class="card-text">{{ cart.stock_description_cut }}</p>
-                    <p class="card-text">Rp {{ cart.price_qty }}</p>
+                    <p class="card-text">Rp {{ num2hum(cart.price_qty) }}</p>
                     <div class="input-group w-auto justify-content-end align-items-center">
                       <input @click="decrement(index)" type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 ">
                       <input type="number" step="1" :max="cart.stock_quantity" v-model.number="cart.quantity" name="quantity" class="quantity-field border-0 text-center w-25">
@@ -128,7 +128,7 @@ import { GitBranch } from 'lucide-vue-next';
         </div>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <div class="text-muted">Total: Rp {{ dcarts.data.reduce((total, item) => total + (item.price * item.quantity), 0) }}</div>
+      <div class="text-muted">Total: Rp {{ num2hum(dcarts.data.reduce((total, item) => total + (item.price * item.quantity), 0)) }}</div>
       <button class="btn btn-danger" @click="clearLocalStorage">Hapus Keranjang</button>
       <button class="btn btn-primary" @click="uniqueOffcanvas.hide(); goToPayment();">Selesai</button>
     </div>
@@ -275,6 +275,10 @@ export default {
                 onSuccess: () => {
                 }
             });
+        },
+        num2hum(num) {
+            num = parseFloat(num) || 0
+            return num.toLocaleString('en-US', { maximumFractionDigits: 2 })
         }
     },
     computed: {

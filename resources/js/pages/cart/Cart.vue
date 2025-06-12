@@ -31,7 +31,7 @@ import { GitBranch } from 'lucide-vue-next';
                 Phone Number
             </div>
             <div class="col-6 text-end">
-                or Sign in
+                <a href="">or Sign in</a>
             </div>
             <div class="col-12">
                 <i class="pi pi-phone"></i> 08123456789
@@ -53,7 +53,7 @@ import { GitBranch } from 'lucide-vue-next';
               <div class="col">
                 <div class="card-block">
                   <h6 class="card-title">{{ cart.stock_name }}</h6>
-                  <p class="card-text">Rp {{ cart.price_qty }}</p>
+                  <p class="card-text">Rp {{ num2hum(cart.price_qty) }}</p>
                   <div class="input-group w-auto justify-content-end align-items-center">
                     <input @click="decrement(index)" type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 ">
                     <input type="number" step="1" :max="cart.stock_quantity" v-model.number="cart.quantity" name="quantity" class="quantity-field border-0 text-center w-25">
@@ -85,7 +85,7 @@ import { GitBranch } from 'lucide-vue-next';
             <p>Total Taxes</p>
         </div>
         <div class="col-6 text-end">
-            <p>Rp {{ detailCart.taxes }}</p>
+            <p>Rp {{ num2hum(detailCart.taxes) }}</p>
         </div>
         <div class="col-6">
             <p>Point Earned</p>
@@ -98,7 +98,7 @@ import { GitBranch } from 'lucide-vue-next';
             <p>Total Bill</p>
         </div>
         <div class="col-6 text-end">
-            <p>Rp {{ detailCart.total }}</p>
+            <p>Rp {{ num2hum(detailCart.total) }}</p>
         </div>
     </div>
 
@@ -280,7 +280,7 @@ export default {
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    // this.clearLocalStorage()
+                    this.clearLocalStorage()
                 }
             });
         },
@@ -295,6 +295,10 @@ export default {
             if (this.uniqueModal) {
                 this.uniqueModal.hide();
             }
+        },
+        num2hum(num) {
+            num = parseFloat(num) || 0
+            return num.toLocaleString('en-US', { maximumFractionDigits: 2 })
         }
     },
     computed: {
@@ -317,6 +321,7 @@ export default {
     mounted() {
         this.loadFromLocalStorage()
         this.getDetailCart();
+        console.log(this.appName)
     },
     watch: {
         dcarts: {

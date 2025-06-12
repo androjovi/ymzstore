@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use App\Models\Payment;
 use Inertia\Inertia;
+use Milon\Barcode\DNS1D;
+use Milon\Barcode\DNS2D;
 
 class OrderController extends Controller
 {
@@ -58,6 +60,13 @@ class OrderController extends Controller
             'created_by' => 1,
         ]);
 
+        $barcodeGenerator = new DNS2D();
+        if ($request->detail['payBy'] == 'qris'){
+            $barcode = $barcodeGenerator->getBarcodePNG($invoiceNumber, 'QRCODE');
+        }else{
+            $barcode = $barcodeGenerator->getBarcodePNG($paymentCode, 'QRCODE');
+        }
+
         return Inertia::render('payment/Payment', [
             'data' => [
                 'invoice' => $invoiceNumber,
@@ -65,6 +74,7 @@ class OrderController extends Controller
                 'total_payment' => $request->detail['total'] + ($request->detail['total'] * $this->taxes),
                 'payBy' => $request->detail['payBy'],
                 'expired' => now()->addMinutes(15)->format('d F Y H:i:s'),
+                'barcode' => $barcode,
             ],
             'message' => 'Order placed successfully!',
         ]);

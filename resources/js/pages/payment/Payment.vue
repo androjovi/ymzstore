@@ -21,10 +21,10 @@ import { GitBranch } from 'lucide-vue-next';
         </div>
         <div class="row no-gutters mt-3">
             <div class="col-12" align="center">
-                <img class="img-fluid " src="https://storage2.me-qr.com/qr/216497495.png">
+                <img class="img-fluid " width="300" :src="'data:image/png;base64,' + detailPayment.barcode">
             </div>
             <div class="col-12 mt-4" align="center">
-                <p>Total Payment: <b>Rp {{ detailPayment.totalPayment }}</b> </p>
+                <p>Total Payment: <b>Rp {{ num2hum(detailPayment.totalPayment) }}</b> </p>
                 <p>Order Code<br><b>{{ detailPayment.paymentCode }}</b></p>
                 <p>Orders will not be processed until you pay this QR Code</p>
             </div>
@@ -42,9 +42,10 @@ import { GitBranch } from 'lucide-vue-next';
         </div>
         <div class="row no-gutters mt-3">
             <div class="col-12" align="center">
-                <img class="img-fluid " src="https://storage2.me-qr.com/qr/216497495.png">
+                <img class="img-fluid " width="300" :src="'data:image/png;base64,' + detailPayment.barcode">
             </div>
             <div class="col-12 mt-4" align="center">
+                <p>Total Payment: <b>Rp {{ num2hum(detailPayment.totalPayment) }}</b> </p>
                 <p>Order Code<br><b>{{ detailPayment.paymentCode }}</b></p>
                 <p>Orders will not be processed until you show the this QR Code to the cashier<br>Payment can only be made at the cashier</p>
             </div>
@@ -68,7 +69,7 @@ import { GitBranch } from 'lucide-vue-next';
                 <p>Show order code to the cashier</p>
             </div>
             <div class="col-12 mt-4" align="center">
-                <button class="btn btn-primary">Print</button>
+                <button class="btn btn-primary" @click="downloadPaymentConfirmation()">Print</button>
             </div>
         </div>
     </div>
@@ -97,6 +98,7 @@ export default {
                 totalPayment: this.data.total_payment || 0,
                 payBy: this.data.payBy || '',
                 expired: this.data.expired || '',
+                barcode: this.data.barcode || ''
             },
             view: this.data.payBy
         };
@@ -120,6 +122,26 @@ export default {
                     this.view = 'done';
                 }
             });
+        },
+        num2hum(num) {
+            num = parseFloat(num) || 0
+            return num.toLocaleString('en-US', { maximumFractionDigits: 2 })
+        },
+        async downloadPaymentConfirmation() {
+            const response = await axios.post(
+                route('payment.pdf'),
+                { detailPayment: this.detailPayment },
+                { responseType: 'blob' }
+            )
+
+            // Buat file blob dan trigger download
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', `Invoice-${this.detailPayment.invoice}.pdf`)
+            document.body.appendChild(link)
+            link.click()
+            // window.open(route('payment.pdf'), '_blank');
         }
     },
     mounted() {
