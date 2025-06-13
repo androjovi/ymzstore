@@ -8,7 +8,7 @@ import { GitBranch } from 'lucide-vue-next';
       <div class="container-fluid">
         <a class="navbar-brand">MyStore</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <input class="form-control me-2" style="padding: 0px;" type="search" placeholder="Search" aria-label="Search"/>
           <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
         </form>
       </div>
@@ -16,7 +16,7 @@ import { GitBranch } from 'lucide-vue-next';
     <div class="container" v-if="view === 'qris'">
         <div class="row no-gutters mt-3">
             <div class="col-12">
-                <p class="text-center">Please make payment before <b>{{ detailPayment.expired }}</b></p>
+                <p class="text-center">Please make payment before <b>{{ formattedTime }}</b></p>
             </div>
         </div>
         <div class="row no-gutters mt-3">
@@ -37,7 +37,7 @@ import { GitBranch } from 'lucide-vue-next';
     <div class="container" v-if="view === 'cash'">
         <div class="row no-gutters mt-3">
             <div class="col-12">
-                <p class="text-center">Please make payment before <b>{{ detailPayment.expired }}</b></p>
+                <p class="text-center">Please make payment before <b>{{ formattedTime }}</b></p>
             </div>
         </div>
         <div class="row no-gutters mt-3">
@@ -102,7 +102,10 @@ export default {
                 expired: this.data.expired || '',
                 barcode: this.data.barcode || ''
             },
-            view: this.data.payBy
+            view: this.data.payBy,
+            duration: 20 * 60,
+            remainingSeconds: 20 * 60,
+            formattedTime: '00:20:00',
         };
     },
     methods: {
@@ -144,10 +147,28 @@ export default {
             document.body.appendChild(link)
             link.click()
             // window.open(route('payment.pdf'), '_blank');
+        },
+        formatTime(totalSeconds) {
+            console.log(totalSeconds)
+            const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0')
+            const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0')
+            const seconds = Math.floor(totalSeconds % 60).toString().padStart(2, '0')
+            return `${hours}:${minutes}:${seconds}`
         }
     },
     mounted() {
+        if (this.detailPayment.payBy == 'cash'){
+            this.remainingSeconds = 120 * 60
+            this.formattedTime = '01:60:60'
+        }
+        let interval = setInterval(() => {
+            if (this.remainingSeconds > 0) {
+                this.remainingSeconds--
+                this.formattedTime = this.formatTime(this.remainingSeconds)
+            } else {
 
+            }
+        }, 1000)
     }
 }
 </script>

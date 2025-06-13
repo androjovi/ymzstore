@@ -7,10 +7,16 @@ import { GitBranch } from 'lucide-vue-next';
     </Head>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand">MyStore</a>
+        <a class="navbar-brand" href="/">MyStore</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+          <button @click="showOrderCart()" type="button" class="btn btn-sm btn-outline-secondary position-relative">
+            <i class="pi pi-shopping-cart" style="font-size: 1.5rem"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ dcarts.data.length }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+            </button>&nbsp;
+          <input class="form-control me-2" style="padding: 0px;" type="search" placeholder="Search" aria-label="Search"/>
         </form>
       </div>
     </nav>
@@ -129,8 +135,8 @@ import { GitBranch } from 'lucide-vue-next';
     </div>
     <div class="d-flex justify-content-between align-items-center">
       <div class="text-muted">Total: Rp {{ num2hum(dcarts.data.reduce((total, item) => total + (item.price * item.quantity), 0)) }}</div>
-      <button class="btn btn-danger" @click="clearLocalStorage">Hapus Keranjang</button>
-      <button class="btn btn-primary" @click="uniqueOffcanvas.hide(); goToPayment();">Selesai</button>
+      <button class="btn btn-danger btn-sm" @click="clearLocalStorage">Hapus Keranjang</button>
+      <button class="btn btn-primary btn-sm" @click="uniqueOffcanvas.hide(); goToPayment();">Selesai</button>
     </div>
     </div>
   </div>
@@ -282,6 +288,14 @@ export default {
         },
         showBranch() {
             this.uniqueModal.show();
+        },
+        showOrderCart(){
+            if (this.dcarts.data.length === 0) {
+                alert('Keranjang masih kosong, silakan pilih menu terlebih dahulu');
+                return;
+            }
+            this.uniqueOffcanvas = new Offcanvas(document.getElementById("offcanvasBottom"));
+            this.uniqueOffcanvas.show();
         }
     },
     computed: {

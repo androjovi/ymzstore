@@ -6,10 +6,16 @@ import { GitBranch } from 'lucide-vue-next';
     <Head title="Menu"></Head>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand">MyStore</a>
+        <a class="navbar-brand" href="/">MyStore</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <!-- <button class="btn-sm btn-outline-success" type="submit">Search</button> -->
+          <button @click="showOrderCart()" type="button" class="btn btn-sm btn-outline-secondary position-relative">
+            <i class="pi pi-shopping-cart" style="font-size: 1.5rem"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ dcarts.data.length }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+            </button>&nbsp;
+          <input class="form-control me-2" style="padding: 0px;" type="search" placeholder="Search" aria-label="Search"/>
         </form>
       </div>
     </nav>
@@ -280,7 +286,7 @@ export default {
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    this.clearLocalStorage()
+                    // this.clearLocalStorage()
                 }
             });
         },
