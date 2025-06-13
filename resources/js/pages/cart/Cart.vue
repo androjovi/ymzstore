@@ -6,7 +6,7 @@ import { GitBranch } from 'lucide-vue-next';
     <Head title="Menu"></Head>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">MyStore</a>
+        <a class="navbar-brand" href="/">Nge•Teh</a>
         <form class="d-flex" role="search">
           <button @click="showOrderCart()" type="button" class="btn btn-sm btn-outline-secondary position-relative">
             <i class="pi pi-shopping-cart" style="font-size: 1.5rem"></i>

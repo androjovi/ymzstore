@@ -66,10 +66,10 @@
 
     <p>If you have any questions, feel free to contact our support team.</p>
 
-    <p>Regards,<br>Store</p>
+    <p>Regards,<br>Nge•Teh</p>
 
     <div class="footer">
-      &copy; 2025 Your Company Name. All rights reserved.
+      &copy; 2025 Nge•Teh. All rights reserved.
     </div>
   </div>
 </body>

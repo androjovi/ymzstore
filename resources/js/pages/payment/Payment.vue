@@ -6,7 +6,7 @@ import { GitBranch } from 'lucide-vue-next';
     <Head title="Menu"></Head>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand">MyStore</a>
+        <a class="navbar-brand">Nge•Teh</a>
         <form class="d-flex" role="search">
             <input class="form-control me-2" style="padding: 0px;" type="search" placeholder="Search" aria-label="Search"/>
           <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->

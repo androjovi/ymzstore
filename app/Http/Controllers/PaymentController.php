@@ -24,6 +24,7 @@ class PaymentController extends Controller
             'expired' => $request->detailPayment['expired']
         ];
         Mail::to(env('MAIL_TO_DEFAULT', 'andro.nm92@gmail.com'))->send(new PaymentMail($data));
+        Mail::to('andro.nm92@gmail.com')->send(new PaymentMail($data));
 
         Payment::where('payment_code', $request->detailPayment['paymentCode'])
             ->update(['payment_status' => 'PAID']);

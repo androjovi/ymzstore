@@ -60,10 +60,10 @@
 
   <p>If you have any questions, feel free to contact our support team.</p>
 
-  <p>Regards,<br>Store</p>
+  <p>Regards,<br>Nge•Teh</p>
 
   <div class="footer">
-    &copy; {{ date('Y') }} Store. All rights reserved.
+    &copy; {{ date('Y') }} Nge•Teh. All rights reserved.
   </div>
 </body>
 </html>
