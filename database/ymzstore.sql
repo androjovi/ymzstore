@@ -48,7 +48,7 @@ CREATE TABLE `branch` (
 LOCK TABLES `branch` WRITE;
 /*!40000 ALTER TABLE `branch` DISABLE KEYS */;
 INSERT IGNORE INTO `branch` VALUES
-(1,'BRANCH0001','Chapter Paragon Mall','Self Order','085882357670','-6.2088','106.8456','https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/99/b9/23/20151124-165301-largejpg.jpg?w=1200&h=-1&s=1','Jl. Paragon No.1, Semarang',1,NULL,NULL),
+(1,'BRANCH0001','Chapter Paragon Mall','Self Order','085882357670','-6.2088','106.8456','https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/99/b9/23/20151124-165301-largejpg.jpg?w=1200&h=-1&s=1','Jalan Juminahan no.26 Ruko Gajah Mada Square, Purwokinanti, Pakualaman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55166',1,NULL,NULL),
 (2,'BRANCH0002','Chapter Mall Kelapa Gading','Self Order','08127635241','-6.1751','110.3688','https://media-cdn.tripadvisor.com/media/photo-s/06/23/86/fd/the-middle-hall.jpg','Jl. Kelapa Gading No.2, Jakarta',1,NULL,NULL),
 (3,'BRANCH0003','Chapter Mall Taman Anggrek','Self Order','081736452716','-6.2500','107.6191','https://www.taman-anggrek-mall.com/storage/01JDQ6XNWE36ADWG6Z9QRHEGM4.webp','Jl. Taman Anggrek No.3, Jakarta',1,NULL,NULL),
 (4,'BRANCH0004','Chapter Mall Puri Indah','Self Order','085882746179','-6.9147','112.7383','https://pict.sindonews.net/dyn/850/pena/news/2023/07/12/171/1149961/5-perbedaan-puri-indah-mall-dan-lippo-mall-puri-meski-samasama-di-jakbar-qbq.jpg','Jl. Puri Indah No.4, Jakarta',1,NULL,NULL),
@@ -285,7 +285,7 @@ CREATE TABLE `orders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,13 @@ INSERT IGNORE INTO `orders` VALUES
 (46,0,'INV-YDZJV6DO',1,3,2,'Self Order',1,100000,100,10,1,'',NULL,1,'2025-06-13 04:54:01','2025-06-13 04:54:01'),
 (47,0,'INV-GEWVTD48',1,3,2,'Self Order',1,100000,100,10,1,'',NULL,1,'2025-06-13 04:54:09','2025-06-13 04:54:09'),
 (48,0,'INV-9BN6OPOP',1,3,2,'Self Order',1,100000,100,10,1,'',NULL,1,'2025-06-13 05:02:29','2025-06-13 05:02:29'),
-(49,0,'INV-RDBEX6PJ',1,3,2,'Self Order',1,100000,100,10,1,'',NULL,1,'2025-06-13 05:03:15','2025-06-13 05:03:15');
+(49,0,'INV-RDBEX6PJ',1,3,2,'Self Order',1,100000,100,10,1,'',NULL,1,'2025-06-13 05:03:15','2025-06-13 05:03:15'),
+(50,0,'INV-BLD5I05L',1,11,2,'Self Order',1,25000,25,10,1,'',NULL,1,'2025-06-13 10:34:44','2025-06-13 10:34:44'),
+(51,0,'INV-7ITWHULO',1,10,2,'Self Order',1,25000,25,10,1,'',NULL,1,'2025-06-13 12:34:30','2025-06-13 12:34:30'),
+(52,0,'INV-HE2HKR9E',1,18,2,'Self Order',1,6000,6,10,1,'',NULL,1,'2025-06-13 16:36:27','2025-06-13 16:36:27'),
+(53,0,'INV-TA8PBGQM',1,1,2,'Self Order',1,3000,3,10,1,'',NULL,1,'2025-06-13 16:37:00','2025-06-13 16:37:00'),
+(54,0,'INV-5AHD3CA8',1,1,2,'Self Order',1,3000,3,10,1,'',NULL,1,'2025-06-13 16:41:45','2025-06-13 16:41:45'),
+(55,0,'INV-KWS0RCTF',1,28,2,'Self Order',1,6000,6,10,1,'',NULL,1,'2025-06-13 16:45:14','2025-06-13 16:45:14');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,7 +397,7 @@ CREATE TABLE `payment` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `payment_payment_code_unique` (`payment_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -444,7 +450,13 @@ INSERT IGNORE INTO `payment` VALUES
 (41,2,'XHS1','INV-YDZJV6DO',100100,'qris','PENDING',1,'2025-06-13 04:54:01','2025-06-13 04:54:01'),
 (42,2,'5H6O','INV-GEWVTD48',100100,'cash','PENDING',1,'2025-06-13 04:54:09','2025-06-13 04:54:09'),
 (43,2,'OOAP','INV-9BN6OPOP',100100,'qris','PAID',1,'2025-06-13 05:02:29','2025-06-13 05:02:31'),
-(44,2,'F4RE','INV-RDBEX6PJ',100100,'qris','PAID',1,'2025-06-13 05:03:15','2025-06-13 05:03:23');
+(44,2,'F4RE','INV-RDBEX6PJ',100100,'qris','PAID',1,'2025-06-13 05:03:15','2025-06-13 05:03:23'),
+(45,2,'8GSP','INV-BLD5I05L',25025,'qris','PAID',1,'2025-06-13 10:34:44','2025-06-13 10:34:45'),
+(46,2,'YXTM','INV-7ITWHULO',25025,'cash','PAID',1,'2025-06-13 12:34:30','2025-06-13 12:34:37'),
+(47,2,'AGVV','INV-HE2HKR9E',6006,'cash','PAID',1,'2025-06-13 16:36:27','2025-06-13 16:36:28'),
+(48,2,'JOMB','INV-TA8PBGQM',3003,'cash','PAID',1,'2025-06-13 16:37:00','2025-06-13 16:37:01'),
+(49,2,'F3NU','INV-5AHD3CA8',3003,'qris','PAID',1,'2025-06-13 16:41:45','2025-06-13 16:41:48'),
+(50,2,'OYJG','INV-KWS0RCTF',6006,'qris','PAID',1,'2025-06-13 16:45:14','2025-06-13 16:45:15');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,10 +487,31 @@ CREATE TABLE `sessions` (
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT IGNORE INTO `sessions` VALUES
+('2CxyicYidLKUu00aKr7rmvZ3zJAfnjVOvDlMZI7N',NULL,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoibVFYODF0N2ROUmx3aEhPTDZNMjVsSzY5YU1kWktZR3ZCTGVVRGl6WiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9nZXQtc3RvY2svMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749833642),
+('bppxfN0RMVG3LTPHpeW8XTqi1ghs9bkCZam4p0aC',NULL,'149.57.180.80','Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/120.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiRm1vYU44YmVkYmg1SW15ZGtPcVEwaFhNdUJWV0R5YUVDdTFMOUVlVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749813940),
+('cjfP9OmnxOzxur44TRPfBfEuO3Vruha7hz2B6mp3',NULL,'5.181.170.220','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiRWtSSzlsQzV2cTRVMmZQOGY3UWVxcUFMY3E5RVBadmpscjgwUTN1ciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749821293),
+('CjvcdRmE7XI6m9KAzxafC7s7wwgosP5Ti2Zc1Ift',NULL,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoicG11Y0s2SnpWTElVdXJWNEJmZEFRRnpQWWxBWTJZZmNKTWFiR2hBZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749832910),
+('cwKBx2YBbBl2B7XHydSwr8OiiTWbKdzeo8l2LgqX',NULL,'149.57.180.167','Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/120.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ01Ed3IyaHc2Z2xDcFg5Vmw3VjdVOVpvaTV1UzZ2ZEdhV0xSRExXbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749820554),
+('gjSesFgksCheSn3YFAVKmUQcTo9tvEjyEJrwj3yQ',NULL,'103.121.138.224','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiVE1SaURWTDRFQ3l3RzhiWFdkc3dNdVpkRThFdFhKYlNBVWhCa1dMOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9tZW51Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1749833808),
 ('he8GntQPMdQj9SmUguNZB55Eud88WXYsG689BIUc',NULL,'127.0.0.1','Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiTDk4YUNIM0NnaGtIMGlPeWF4eThHNkl2cjYwWnRmTGE3UlgyRlMxVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9jYXJ0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1749792643),
+('jRrVavnlVHcXzyp3cloAOXqJy7IIYm3S3z6woeBK',NULL,'36.79.242.234','WhatsApp/2.23.20.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiVWdyR0dQYkc2VDF3djBtRHpVaG9hOHJ3REw2OXVRYWFPVWFyV1dFZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749818267),
+('KIu4UiUbGVtb1piC7u5z8gSfkjyqhmHIcBlcti4k',NULL,'202.153.226.66','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoibjAxNTNubTZPbnNuVUg2TmxkeTlBQjlkeFd5bVpCTXNWV0h1Q0JYRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749810898),
+('l5LkXBFbVO2CG1ZEWXytsrncc4WNQvwfWEtXFqWX',NULL,'149.57.180.115','Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/120.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiUm1UUEYwRDduUVB3SDBQdktUSUxQeWRyNzJ2eWFrNWJ6VWlMa1h0TCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749820537),
+('ncC9ggOEVEZlwvjnvkMLHVxu3aD9FsDMy07v9WDG',NULL,'103.121.138.224','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiZWJqUkxCMjJCN01kTFhpR3R6V3FMZ0lpN3RmdXd4UUFWdjV3SHl4RyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9tZW51Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1749833226),
+('PnOo7zyuSC4sV0JZ3MU2ZfcakBaRRfgdDL1A2iNm',NULL,'36.79.242.234','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiQnEzT0l3NVJrZDVwcjQ1RjhOVGJ2YmVCd2kxTktJbjRySzhnWUFEcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749818152),
 ('qoHAp9qF9wcuLRFIQKIdqsju31IkYOhI0yCez9tR',NULL,'114.10.112.179','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoicW9VRU1WaXJ2U2ZZaWxrZldzcDRIb2p0NE81QlJxdUh0ZmRXZXduOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9nZXQtc3RvY2svMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749796031),
+('ranaPD1ZpIDWV187pFIFenOlbhCTSpO3NWVvwIF4',NULL,'5.181.170.220','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiREFlUXJUc1laYzNzb3N4WFNWN0ZvZEJTWlJYd05kMmVhYWdoSDI3NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749821289),
+('rGd2LZWx7z9fiaXYdpnxN4LcvGkid5rGUgGeicpy',NULL,'182.4.102.184','Mozilla/5.0 (iPhone; CPU iPhone OS 17_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1','YTozOntzOjY6Il90b2tlbiI7czo0MDoiaWszZGxWMkd5UUl4S3lWUUF5QVdqZkRvRk5iQXBFUkxNV25ITlRXMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749820185),
 ('RKrn3btFpViT3c25l0fDOene6USMpiaNt0JTW5pg',NULL,'202.153.226.66','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiVWpxa0dVSVdCR3hrZHNMSlhSQmNGRExWT3A1SE52TmlWdUxZSHdCViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749790953),
-('wKrDbuBrhDFPZZ3PHR9OSHniJb3vF19aNSqpVLCL',NULL,'188.245.193.111','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiYWE5NkJOWVV2Rm1hQ0JSdzY0VmYwSDVkSFIxQ2dGRnRUdkVNM0w2UCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749791187);
+('SFIZV7AkaaDSH8LMSPMvimpO7e6t1n4AOlbeY8nP',NULL,'162.243.51.137','Mozilla/5.0 (compatible; OpenDirScraper/1.0)','YTozOntzOjY6Il90b2tlbiI7czo0MDoibzNFVEVLYjFqdUpmTVBJWG1wVGM2TWhKbU5KWFRmakRyTGZkcmR6cSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749819400),
+('t0qg3diwYvTCwFEi8r6ARWTbuVlcOVuDljSeYKFz',NULL,'103.121.138.224','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiMTVOU285WDBiTXhYYUpBN1dSZzdUaU5weVJkWEJ4djlOVjA4cWJzeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9nZXQtc3RvY2svMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749832529),
+('tIkqsWUrPU8zHm8tApuG3fRzkodEfyqDg7TTjKEj',NULL,'36.79.242.234','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoicFRIdG1HUExYbGsweFE5VWZlNnFjWndmcmdxWUJaeXpyY2JIeVp2ZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9nZXQtc3RvY2svNCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749827069),
+('tXEZ6QrUKk8ZUjxKjkiIMmIw6heTLMQVyv929WNk',NULL,'149.57.180.37','Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/120.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiMFhpRHZxemNnVmo0Mnoyc3hkYUNROXp1elp3U0NRc04weks2OU1ySSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749812145),
+('UkW4G95x9UOoKVboCcoFhDvX90IlaTXsehWifynW',NULL,'103.121.138.224','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiazZGcGR4VWpqSzRab044cmhUSWxMT0p0OWxMcm9RQ05xVlRSc05qQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZC9tZW51Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1749832621),
+('wKrDbuBrhDFPZZ3PHR9OSHniJb3vF19aNSqpVLCL',NULL,'188.245.193.111','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiYWE5NkJOWVV2Rm1hQ0JSdzY0VmYwSDVkSFIxQ2dGRnRUdkVNM0w2UCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749791187),
+('yasa13Iz7n6ygtkaC1RlLbpzUQD1rJT4hIV65VO5',NULL,'159.89.122.178','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiNmxidlNBVjdzTW84ejE5bEVvd2dlMGNUS2FlQTZlVTZTVXo5dTVqYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly93d3cuc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749821961),
+('YLchjUPqeiUiu1t9xFH5Tjzr7Kx8ZCmsLJDRyzNC',NULL,'36.78.42.98','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiNDZpQU8yNjJTSzRtd3ZXMmhIdktWYXJsbWcwOURKbzJuRHhVd3RieiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vc3RvcmUucHJvamVjdC1mei5teS5pZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1749818350),
+('Z4QyODFZzhVE46gM3DehumbjtI0CTSlPLyMGeKkM',NULL,'159.89.122.178','Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiMDBKaHBONjhHaG00QUVDNkJvZk9FR2MwUklhT25kallrOFlsUmhoQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHBzOi8vd3d3LnN0b3JlLnByb2plY3QtZnoubXkuaWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1749821963);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -507,7 +540,7 @@ CREATE TABLE `stock` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `stock_stock_code_unique` (`stock_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -517,22 +550,38 @@ CREATE TABLE `stock` (
 LOCK TABLES `stock` WRITE;
 /*!40000 ALTER TABLE `stock` DISABLE KEYS */;
 INSERT IGNORE INTO `stock` VALUES
-(1,1,'STOCK0001','Steak Sapi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',5,2,'https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg','https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg','https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg',100000,0.3,1,NULL,NULL),
-(2,1,'STOCK0002','Rendang','Masakan khas Indonesia yang mendunia. Daging sapi dimasak perlahan dalam santan dan bumbu rempah-rempah yang kaya hingga mengering dan bumbunya meresap sempurna.',7,2,'https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg','https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg','https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg',53000,0.3,1,NULL,NULL),
-(3,1,'STOCK0003','Paket Steak Sapi 2Kg','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',7,1,'https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg','https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg','https://asset.kompas.com/crops/ZApJuQRRj8hCN6qhFeFp1YcDxeM=/0x0:1000x667/1200x800/data/photo/2022/12/27/63aa85776cf9e.jpg',100000,0.3,1,NULL,NULL),
-(4,1,'STOCK0004','Paket Rendang 1Kg','Masakan khas Indonesia yang mendunia. Daging sapi dimasak perlahan dalam santan dan bumbu rempah-rempah yang kaya hingga mengering dan bumbunya meresap sempurna.',7,1,'https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg','https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg','https://cdn0-production-images-kly.akamaized.net/jAhRHll_RQBlFGXC18vg2VpRWZ0=/0x120:3000x1811/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3282059/original/075075700_1604028408-shutterstock_1788721670.jpg',53000,0.3,1,NULL,NULL),
-(5,1,'STOCK0005','Oseng Mercon Sapi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',4,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.18.04-1024x1012.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.18.04-1024x1012.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.18.04-1024x1012.png',34000,0.3,1,NULL,NULL),
-(6,1,'STOCK0006','Sapi Lada Hitam','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',2,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-16.00.05-1024x1020.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-16.00.05-1024x1020.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-16.00.05-1024x1020.png',75000,0.3,1,NULL,NULL),
-(7,1,'STOCK0007','Sop Tulang Sapi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',2,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.14.34-956x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.14.34-956x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.14.34-956x1024.png',42000,0.3,1,NULL,NULL),
-(8,1,'STOCK0008','Daging sapi masak kecap','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',2,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.22.31-1024x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.22.31-1024x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.22.31-1024x1024.png',42000,0.3,1,NULL,NULL),
-(9,1,'STOCK0009','Gulai Cincang','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',9,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.27.46-984x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.27.46-984x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.27.46-984x1024.png',35000,0,0,NULL,NULL),
-(10,1,'STOCK0010','Rawon Sapi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',5,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.55.16-715x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.55.16-715x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.55.16-715x1024.png',25000,0,0,NULL,NULL),
-(11,1,'STOCK0011','Beef Bulgogi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',5,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.40.03.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.40.03.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-14.40.03.png',25000,0,0,NULL,NULL),
-(12,1,'STOCK0012','Iga Sapi Bakar','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',5,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.06.58-803x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.06.58-803x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.06.58-803x1024.png',75000,0,0,NULL,NULL),
-(13,1,'STOCK0013','Empal Daging Sapi','Olahan daging sapi yang paling ikonik, biasanya dipanggang atau dibakar. Ada berbagai potongan steak seperti sirloin, tenderloin, ribeye, T-bone, dan porterhouse. Tingkat kematangan bisa diatur dari rare hingga well-done.',5,2,'https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.36.40-988x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.36.40-988x1024.png','https://www.ruparupa.com/blog/wp-content/uploads/2021/06/Screen-Shot-2021-06-16-at-15.36.40-988x1024.png',75000,0,0,NULL,NULL),
-(14,1,'STOCK0014','Nasi Putih','Nasi Putih',99,4,'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0DGM5-r1hd-pmyMJUXs63IHbZpzZM8oW1UkWfFSGgwBDRp7kkzit_t5g5ymj1iNZQWAkYU3rGyWMfuoO-DZsvl19V8OIRqLGVVSVyb4p7yyC6xAu3qBRBisNCxr6FHOuS-AWdSyhrpbEb/s1600/20200818_020709.jpg','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0DGM5-r1hd-pmyMJUXs63IHbZpzZM8oW1UkWfFSGgwBDRp7kkzit_t5g5ymj1iNZQWAkYU3rGyWMfuoO-DZsvl19V8OIRqLGVVSVyb4p7yyC6xAu3qBRBisNCxr6FHOuS-AWdSyhrpbEb/s1600/20200818_020709.jpg','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0DGM5-r1hd-pmyMJUXs63IHbZpzZM8oW1UkWfFSGgwBDRp7kkzit_t5g5ymj1iNZQWAkYU3rGyWMfuoO-DZsvl19V8OIRqLGVVSVyb4p7yyC6xAu3qBRBisNCxr6FHOuS-AWdSyhrpbEb/s1600/20200818_020709.jpg',5000,0,0,NULL,NULL),
-(15,1,'STOCK0015','Air Mineral','Air Mineral',99,4,'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//98/MTA-3759227/aqua_air-mineral-aqua-600-ml-botol_full02.jpg','https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//98/MTA-3759227/aqua_air-mineral-aqua-600-ml-botol_full02.jpg','https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//98/MTA-3759227/aqua_air-mineral-aqua-600-ml-botol_full02.jpg',8000,0,0,NULL,NULL),
-(16,1,'STOCK0016','Es Teh Manis','Es Teh Manis',99,4,'https://nilaigizi.com/assets/images/produk/produk_1578041377.jpg','https://nilaigizi.com/assets/images/produk/produk_1578041377.jpg','https://nilaigizi.com/assets/images/produk/produk_1578041377.jpg',4000,0,0,NULL,NULL);
+(1,1,'S001','Teh Original','Teh Original',99,5,'https://project-fz.my.id/assets/teh-original.jpg','https://project-fz.my.id/assets/teh-original.jpg','https://project-fz.my.id/assets/teh-original.jpg',3000,0,0,NULL,NULL),
+(2,2,'S002','Teh Lemon','Teh Lemon',99,5,'https://project-fz.my.id/assets/teh-lemon.jpg','https://project-fz.my.id/assets/teh-lemon.jpg','https://project-fz.my.id/assets/teh-lemon.jpg',6000,0,0,NULL,NULL),
+(3,3,'S003','Teh Apel','Teh Apel',99,5,'https://project-fz.my.id/assets/teh-apel.jpg','https://project-fz.my.id/assets/teh-apel.jpg','https://project-fz.my.id/assets/teh-apel.jpg',6000,0,0,NULL,NULL),
+(4,4,'S004','Teh Mangga','Teh Mangga',99,5,'https://project-fz.my.id/assets/teh-mangga.jpg','https://project-fz.my.id/assets/teh-mangga.jpg','https://project-fz.my.id/assets/teh-mangga.jpg',6000,0,0,NULL,NULL),
+(5,5,'S005','Teh Nanas','Teh Nanas',99,5,'https://project-fz.my.id/assets/teh-nanas.jpg','https://project-fz.my.id/assets/teh-nanas.jpg','https://project-fz.my.id/assets/teh-nanas.jpg',6000,0,0,NULL,NULL),
+(6,6,'S006','Teh Leci','Teh Leci',99,5,'https://project-fz.my.id/assets/teh-leci.jpg','https://project-fz.my.id/assets/teh-leci.jpg','https://project-fz.my.id/assets/teh-leci.jpg',6000,0,0,NULL,NULL),
+(7,7,'S007','Teh Persik','Teh Persik',99,5,'https://project-fz.my.id/assets/teh-persik.jpg','https://project-fz.my.id/assets/teh-persik.jpg','https://project-fz.my.id/assets/teh-persik.jpg',6000,0,0,NULL,NULL),
+(8,8,'S008','Teh Melon','Teh Melon',99,5,'https://project-fz.my.id/assets/teh-melon.jpg','https://project-fz.my.id/assets/teh-melonl.jpg','https://project-fz.my.id/assets/teh-melonl.jpg',6000,0,0,NULL,NULL),
+(9,9,'S009','Teh Markisa','Teh Markisa',99,5,'https://project-fz.my.id/assets/teh-markisa.jpg','https://project-fz.my.id/assets/teh-markisa.jpg','https://project-fz.my.id/assets/teh-markisa.jpg',6000,0,0,NULL,NULL),
+(10,10,'S010','Teh Jambu','Teh Jambu',99,5,'https://project-fz.my.id/assets/teh-jambu.jpg','https://project-fz.my.id/assets/teh-jambu.jpg','https://project-fz.my.id/assets/teh-jambu.jpg',6000,0,0,NULL,NULL),
+(11,11,'S012','Teh Kampul','Teh Kampul',99,5,'https://project-fz.my.id/assets/teh-kampul.jpg','https://project-fz.my.id/assets/teh-kampul.jpg','https://project-fz.my.id/assets/teh-kampul.jpg',6000,0,0,NULL,NULL),
+(12,12,'S013','Teh Stroberi','Teh Stroberi',99,5,'https://project-fz.my.id/assets/teh-stroberi.jpg','https://project-fz.my.id/assets/teh-stroberi.jpg','https://project-fz.my.id/assets/teh-stroberi.jpg',6000,0,0,NULL,NULL),
+(13,13,'S014','Teh Jeruk','Teh Jeruk',99,5,'https://project-fz.my.id/assets/teh-jeruk.jpg','https://project-fz.my.id/assets/teh-jeruk.jpg','https://project-fz.my.id/assets/teh-jeruk.jpg',6000,0,0,NULL,NULL),
+(15,15,'S016','Teh Milo','Teh Milo',99,5,'https://project-fz.my.id/assets/teh-milo.jpg','https://project-fz.my.id/assets/teh-milo.jpg','https://project-fz.my.id/assets/teh-milo.jpg',6000,0,0,NULL,NULL),
+(16,1,'S017','Mojito Stroberi','Mojito Stroberi',99,6,'https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(17,1,'S018','Mojito Anggur','Mojito Anggur',99,6,'https://project-fz.my.id/assets/mojito-anggur.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(18,1,'S019','Mojito Leci','Mojito Leci',99,6,'https://project-fz.my.id/assets/mojito-leci.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(19,1,'S020','Mojito Jeruk','Mojito Jeruk',99,6,'https://project-fz.my.id/assets/mojito-jeruk.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(20,1,'S021','Mojito Mangga','Mojito Mangga',99,6,'https://project-fz.my.id/assets/mojito-mangga.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(21,1,'S022','Mojito Buah Mix','Mojito Buah Mix',99,6,'https://project-fz.my.id/assets/mojito-buahmix.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(22,1,'S023','Mojito Nanas','Mojito Nanas',99,6,'https://project-fz.my.id/assets/mojito-nanas.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(23,1,'S024','Mojito Melon','Mojito Melon',99,6,'https://project-fz.my.id/assets/mojito-melon.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(24,1,'S025','Mojito Persik','Mojito Persik',99,6,'https://project-fz.my.id/assets/mojito-persik.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(25,1,'S026','Mojito Apel','Mojito Apel',99,6,'https://project-fz.my.id/assets/mojito-apel.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(26,1,'S027','Mojito Jambu','Mojito Jambu',99,6,'https://project-fz.my.id/assets/mojito-jambu.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(27,1,'S028','Mojito Markisa','Mojito Markisa',99,6,'https://project-fz.my.id/assets/mojito-markisa.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(28,1,'S029','Milo Susu','Milo Susu',99,7,'https://project-fz.my.id/assets/milo-susu.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',6000,0,0,NULL,NULL),
+(29,1,'S030','Es Cokelat','Es Cokelat',99,7,'https://project-fz.my.id/assets/es-cokelat.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',7000,0,0,NULL,NULL),
+(30,1,'S031','Milk Tea','Milk Tea',99,7,'https://project-fz.my.id/assets/milk-tea.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',8000,0,0,NULL,NULL),
+(31,1,'S032','Thai Tea','Thai Tea',99,7,'https://project-fz.my.id/assets/thai-tea.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',8000,0,0,NULL,NULL),
+(32,1,'S033','Matcha','Matcha',99,7,'https://project-fz.my.id/assets/matcha.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',8000,0,0,NULL,NULL),
+(33,1,'S034','Taro','Taro',99,7,'https://project-fz.my.id/assets/taro.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg','https://project-fz.my.id/assets/mojito-stroberi.jpg',7000,0,0,NULL,NULL);
 /*!40000 ALTER TABLE `stock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,7 +599,7 @@ CREATE TABLE `stock_type` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -563,7 +612,10 @@ INSERT IGNORE INTO `stock_type` VALUES
 (1,'Promo','Promo Baru',NULL,NULL),
 (2,'Special Sapi','Special Sapi',NULL,NULL),
 (3,'Menu Ayam','Menu Ayam',NULL,NULL),
-(4,'Lain-Lain','Lain-Lain',NULL,NULL);
+(4,'Lain-Lain','Lain-Lain',NULL,NULL),
+(5,'Teh Series','Teh Series',NULL,NULL),
+(6,'Mojito Series','Mojito Series',NULL,NULL),
+(7,'Milk Series','Milk Series',NULL,NULL);
 /*!40000 ALTER TABLE `stock_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -609,4 +661,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-06-13 17:19:04
+-- Dump completed on 2025-06-13 23:58:46
