@@ -286,7 +286,7 @@ export default {
             }
             this.$inertia.post('/order', { carts: this.dcarts.data, detail: this.detailCart }, {
                 onSuccess: () => {
-                    // this.clearLocalStorage()
+                    this.clearLocalStorage()
                 }
             });
         },
